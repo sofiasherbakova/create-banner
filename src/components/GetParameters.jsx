@@ -2,18 +2,22 @@ import React, { useState, useEffect, useRef } from "react";
 import { Row, Col, Button, Form, Input, Card, CardBody, CardTitle} from 'reactstrap';
 
 const Canvas = (props) => {
-  
   const canvasRef = useRef(null);
-  console.log(props.data);
+  
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
+    var img = new Image();
+    img.src = props.data.img;
 
     context.fillStyle = props.data.color;
     context.fillRect(0, 0, context.canvas.width, context.canvas.height);
-  }, []);
+    context.drawImage(img, 0, 0);
+  }, [props.data]);
   return(
-    <canvas className="canva" width={350} height={450} ref={canvasRef} {...props}/>
+    <div>
+      <canvas className="canva" width={350} height={450} ref={canvasRef}/>
+    </div>
   );
 }
 
@@ -29,18 +33,6 @@ const GetParameters = () => {
       img : img
     }
 
-    const getData = () => {
-      
-      /*data = {
-        type : type,
-        color : color,
-        text : text,
-        img : img
-      }
-      let json = JSON.stringify(data);*/
-      //console.log(json);
-    }
-
     return (
       <Row>
         <Col md={6} className="m-auto">
@@ -50,7 +42,7 @@ const GetParameters = () => {
                     <CardTitle className="options" tag="h5">1. Выбери заливку</CardTitle>
                     <Row>
                       <Col>
-                        <Input type="select" name="select" onChange={e => setType(e.target.value)}>
+                        <Input type="select" name="type" onChange={e => setType(e.target.value)}>
                           <option value="color">Сплошной цвет</option>
                           <option value="gradient">Градиент</option>
                         </Input>
@@ -61,7 +53,7 @@ const GetParameters = () => {
                     <Input type="text" value={img} onChange={e => setImage(e.target.value)}/>
                     <CardTitle className="options" tag="h5">3. Добавь текст</CardTitle>
                     <Input type="text" value={text} onChange={e => setText(e.target.value)}/>
-                    <Button className="options" onClick={getData} color="danger">Создать!</Button>
+                    <Button className="options" color="danger">Создать!</Button>
                   </Form>
                 </CardBody>
             </Card>
