@@ -20,3 +20,24 @@ code {
   text-align: left;
   margin-top: 2rem;
 }
+
+
+
+.MyImage{  
+  z-index: 2;
+  position: relative;
+}
+
+.MyText{
+  z-index: 3;
+  position: relative;
+  color: white;
+  font: inherit;
+}
+
+.Background{
+  border-radius: 15px;
+  background-color: black;
+  width: 325px;
+  height: 450px;
+}

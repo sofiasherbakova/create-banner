@@ -1,22 +1,30 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Row, Col, Button, Form, Input, Card, CardBody, CardTitle} from 'reactstrap';
+import { Row, Col, Button, Form, Input, Card, CardBody, CardTitle, Label} from 'reactstrap';
 
-const Canvas = (props) => {
-  const canvasRef = useRef(null);
-  
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const context = canvas.getContext('2d');
-    var img = new Image();
-    img.src = props.data.img;
-
-    context.fillStyle = props.data.color;
-    context.fillRect(0, 0, context.canvas.width, context.canvas.height);
-    context.drawImage(img, 0, 0);
-  }, [props.data]);
+const MyText = (props) => {
+  console.log(props);
   return(
-    <div>
-      <canvas className="canva" width={350} height={450} ref={canvasRef}/>
+    <div className="MyText">
+      {props.props.data.text}
+    </div>
+  );
+}
+
+const MyImage = (props) => {
+
+  return(
+    <div className="MyImage">
+      <img src={props.props.data.img}/>
+    </div>
+  );
+}
+
+const Background = (props) => {
+
+  return(
+    <div style={{backgroundColor: props.data.color}} className="Background">
+      <MyImage props={props}/>
+      <MyText props={props}/>
     </div>
   );
 }
@@ -24,13 +32,14 @@ const Canvas = (props) => {
 const GetParameters = () => {
     const [type, setType] = useState("color");
     const [color, setColor] = useState("#000000");
-    const [text, setText] = useState("");
-    const [img, setImage] = useState("");
+    const [text, setText] = useState("Your text");
+    const [img, setImage] = useState("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.ru%2Fpin%2F376261743866615679%2F&psig=AOvVaw1eZBSmaw0uC2wEwMC6Liy3&ust=1607191047195000&source=images&cd=vfe&ved=2ahUKEwiW4fOs87TtAhVHlYsKHbLAA-YQr4kDegUIARDNAQ");
+
     let data = {
       type : type,
       color : color,
       text : text,
-      img : img
+      img : img, 
     }
 
     return (
@@ -53,13 +62,13 @@ const GetParameters = () => {
                     <Input type="text" value={img} onChange={e => setImage(e.target.value)}/>
                     <CardTitle className="options" tag="h5">3. Добавь текст</CardTitle>
                     <Input type="text" value={text} onChange={e => setText(e.target.value)}/>
-                    <Button className="options" color="danger">Создать!</Button>
+                    <Label></Label>
                   </Form>
                 </CardBody>
             </Card>
         </Col>
         <Col md={6} className="m-auto">
-            <Canvas data={data}/>
+            <Background data={data}/>
         </Col>
       </Row>
     );
