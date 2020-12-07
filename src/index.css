@@ -23,21 +23,22 @@ code {
 
 
 
-.MyImage{  
-  z-index: 2;
+.MyImage img {
   position: relative;
+  max-width: 325px;
+  max-height: 450px;
 }
 
 .MyText{
-  z-index: 3;
   position: relative;
   color: white;
   font: inherit;
+  font-weight: bold;
+  font-size: 35pt;
 }
 
 .Background{
   border-radius: 15px;
-  background-color: black;
   width: 325px;
   height: 450px;
 }
