@@ -21,24 +21,32 @@ code {
   margin-top: 2rem;
 }
 
-
-
 .MyImage img {
   position: relative;
   max-width: 325px;
   max-height: 450px;
 }
 
-.MyText{
+.MyTextik{
   position: relative;
-  color: white;
-  font: inherit;
-  font-weight: bold;
-  font-size: 35pt;
+  bottom: 40px;
+  width: 325px;
+  box-sizing: border-box;
+  padding: 0 17px 0 20px;
+  font-weight: 700;
+  font-size: 45px;
+  line-height: 37px;
+  color: #fff;
+  text-align: left;
+  white-space: pre-line;
+  overflow: hidden;
+  max-height: 111px;
 }
+
 
 .Background{
   border-radius: 15px;
   width: 325px;
   height: 450px;
+  cursor: pointer;
 }

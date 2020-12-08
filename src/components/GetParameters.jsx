@@ -1,6 +1,7 @@
 import React, { useState, useRef , useEffect} from "react";
 import { Row, Col, Button, Form, Input, Card, CardBody, CardTitle, Label} from "reactstrap";
 
+
 const Buttons = (props) => {
   return(
     <div className="MyButtons">
@@ -13,7 +14,7 @@ const Buttons = (props) => {
 
 const MyText = (props) => {
   return(
-    <div className="MyText">
+    <div className="MyTextik">
       {props.props.data.text}
     </div>
   );
@@ -27,21 +28,24 @@ const MyImage = (props) => {
   );
 }
 
-const Background = (props) => {
+const Background = React.forwardRef((props, ref)  => {
   return(
-    <div style={{background: (props.data.type === "color" ? props.data.color : `linear-gradient(to bottom, ${props.data.color}, ${props.data.secondColor})`)}} className="Background">
+    <div ref={ref} style={{background: (props.data.type === "color" ? props.data.color : `linear-gradient(to bottom, ${props.data.color}, ${props.data.secondColor})`)}} className="Background">
       <MyImage props={props}/>
       <MyText props={props}/>
     </div>
   );
-}
+})
 
 const GetParameters = () => {
     const [type, setType] = useState("color");
     const [color, setColor] = useState("#000000");
     const [secondColor, setSecondColor] = useState("#000000");
-    const [text, setText] = useState("Your text");
+    const [text, setText] = useState("Ваш гениальный текст");
     const [img, setImage] = useState("https://cs7.pikabu.ru/post_img/big/2019/04/29/8/1556545846165742373.png");
+    
+    const [bannerHTML, getHTML] = useState("");
+    var ref = useRef();
 
     let data = {
       type : type,
@@ -50,13 +54,31 @@ const GetParameters = () => {
       text : text,
       img : img, 
     }
-    
-    var el = useRef();
-    console.log("ggggggggg", el);
-    var tex = el.outerHTML;
 
+    useEffect(() => {
+      getHTML(ref.current.outerHTML);
+    },[data]);
+    
+    function copyHTML() {
+        const el = document.createElement('input');
+        el.value = bannerHTML;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand("copy");
+        el.remove();
+    }
+
+    function copyJSON() {
+      const el = document.createElement('input');
+      el.value = JSON.stringify(data);
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand("copy");
+      el.remove();
+  }
+ 
     return (
-      <div ref={el}>
+      <div>
         <Row>
           <Col md={6} className="m-auto">
               <Card className="mb-4 shadow-sm">
@@ -90,12 +112,13 @@ const GetParameters = () => {
               </Card>
           </Col>
           <Col md={6} className="m-auto">
-              <Background data={data}/>
+              <Background ref={ref} data={data}/>
           </Col>
         </Row>
         <Row>
-        <Button color="primary" onClick={console.log("ggg", tex)}>Скопировать JSX</Button>
-          <Buttons/>
+        <Button color="primary">Сохранить в PNG</Button>{' '}
+          <Button color="primary" onClick={copyHTML}>Скопировать HTML</Button>{' '}
+          <Button color="primary"onClick={copyJSON}>Скопировать JSON</Button>
         </Row>
       </div>
     );
