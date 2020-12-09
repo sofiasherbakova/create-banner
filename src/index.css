@@ -16,37 +16,8 @@ code {
   margin-top: 10%;
 }
 
-.options{
-  text-align: left;
-  margin-top: 2rem;
-}
-
-.MyImage img {
-  position: relative;
-  max-width: 325px;
-  max-height: 450px;
-}
-
-.MyTextik{
-  position: relative;
-  bottom: 40px;
-  width: 325px;
-  box-sizing: border-box;
-  padding: 0 17px 0 20px;
-  font-weight: 700;
-  font-size: 45px;
-  line-height: 37px;
-  color: #fff;
-  text-align: left;
-  white-space: pre-line;
-  overflow: hidden;
-  max-height: 111px;
-}
-
-
-.Background{
-  border-radius: 15px;
-  width: 325px;
-  height: 450px;
-  cursor: pointer;
+.buttons{
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
 }
