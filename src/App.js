@@ -20,7 +20,7 @@ function App() {
     secondColor : secondColor,
     text : text,
     img : img, 
-    link :link
+    link : link
   }
 
   function copyHTML() {
