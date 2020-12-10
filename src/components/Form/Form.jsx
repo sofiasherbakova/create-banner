@@ -2,7 +2,7 @@ import React from "react";
 import { Row, Col, Form, Input, Card, CardBody, CardTitle} from "reactstrap";
 import './Form.css';
 
-const GetParameters = ({setType, setColor, setSecondColor, setText, setImage, type, color, secondColor, text, img}) => {
+const GetParameters = ({setType, setColor, setSecondColor, setText, setImage, setLink, type, color, secondColor, text, img, link}) => {
     return (
         <Card className="mb-4 shadow-sm">
             <CardBody>
@@ -29,6 +29,8 @@ const GetParameters = ({setType, setColor, setSecondColor, setText, setImage, ty
                 <Input type="text" value={img} onChange={e => setImage(e.target.value)}/>
                 <CardTitle className="options" tag="h5">3. Добавь текст</CardTitle>
                 <Input type="text" value={text} onChange={e => setText(e.target.value)}/>
+                <CardTitle className="options" tag="h5">* Ссылка для перехода (не обязательно)</CardTitle>
+                <Input type="text" value={link} onChange={e => setLink(e.target.value)}/>
               </Form>
             </CardBody>
         </Card>

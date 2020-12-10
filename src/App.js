@@ -9,8 +9,9 @@ function App() {
   const [type, setType] = useState("color");
   const [color, setColor] = useState("#000000");
   const [secondColor, setSecondColor] = useState("#000000");
-  const [text, setText] = useState("Ваш текст будет здесь");
-  const [img, setImage] = useState("https://cs7.pikabu.ru/post_img/big/2019/04/29/8/1556545846165742373.png");
+  const [text, setText] = useState("Ваш текст");
+  const [img, setImage] = useState("");
+  const [link, setLink] = useState("");
   let ref = useRef();
 
   let data = {
@@ -19,34 +20,35 @@ function App() {
     secondColor : secondColor,
     text : text,
     img : img, 
+    link :link
   }
 
   function copyHTML() {
     navigator.clipboard.writeText(ref.current.outerHTML)
     .then(() => {
-      alert('Сopy!');
+      alert("HTML-разметка была скопирована в буфер обмена");
     })
-    .catch(err => {
-      alert('Error! :(');
+    .catch(() => {
+      alert("Error! :(");
     });
   }
   
   function copyJSON() {
     navigator.clipboard.writeText(JSON.stringify(data))
     .then(() => {
-      alert('Сopy!');
+      alert("JSON-конфигурация была скопирована в буфер обмена");
     })
-    .catch(err => {
-      alert('Error! :(');
+    .catch(() => {
+      alert("Error! :(");
     });
   }
 
   function savePNG() {
     html2canvas(ref.current).then(function(canvas) {
-      const a = document.createElement('a');
-      a.style.display = 'none';
-      a.download = "name";
-      a.href = canvas.toDataURL('image/png');
+      const a = document.createElement("a");
+      a.style.display = "none";
+      a.download = "save";
+      a.href = canvas.toDataURL("image/png");
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -64,11 +66,13 @@ function App() {
               setSecondColor={e => setSecondColor(e)}
               setText={e => setText(e)}
               setImage={e => setImage(e)}
+              setLink={e => setLink(e)}
               type={type}
               color={color}
               secondColor={secondColor}
               img={img}
-              text={text}/>
+              text={text}
+              link={link}/>
           </Col>
           <Col>
               <Banner ref={ref} data={data}/>
